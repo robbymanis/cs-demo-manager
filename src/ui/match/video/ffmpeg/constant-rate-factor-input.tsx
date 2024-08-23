@@ -13,8 +13,10 @@ export function ConstantRateFactorInput() {
 
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     const value = event.target.value.trim();
-    let newConstantRateFactor = value === '' ? defaultValue : Number(value);
-    if (newConstantRateFactor < 0) {
+    let newConstantRateFactor;
+    if (value === '') newConstantRateFactor = -1;
+    newConstantRateFactor = Number(value);
+    if (newConstantRateFactor < -1) {
       newConstantRateFactor = defaultValue;
     } else if (newConstantRateFactor > maxValue) {
       newConstantRateFactor = maxValue;

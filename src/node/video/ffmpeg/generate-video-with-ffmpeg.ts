@@ -56,6 +56,15 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   if (inputParameters !== '') {
     args.push(inputParameters);
   }
+  if (constantRateFactor === -1) {
+    args.push(
+      `-i "${rawFilesPathPattern}"`,
+      `-i "${wavFilePath}"`,
+      `-vcodec ${videoCodec} -pix_fmt yuv420p`,
+      `-acodec ${audioCodec}`,
+      `-b:a ${audioBitrate}K`,
+    );
+  }
   args.push(
     `-i "${rawFilesPathPattern}"`,
     `-i "${wavFilePath}"`,
